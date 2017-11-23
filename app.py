@@ -3,7 +3,7 @@ import sys
 import smtplib
 server = smtplib.SMTP('smtp.gmail.com', 587)
 server.starttls()
-server.login(str(os.environ['kossiitkgp@gmail.com']), str(os.environ['PASSWD']))
+server.login(str(os.environ['EMAIL']), str(os.environ['PASSWD']))
 
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -39,10 +39,12 @@ while(1):
     if not text:
         break
     msg['To'] = text
+    you = text
     try:
         server.sendmail(me, you, msg.as_string())
     except:
         del(server)
+        print("Mail server busy, will retry after some time. ")
         os.system("sleep 5m")
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
@@ -51,4 +53,4 @@ while(1):
         server.login(str(os.environ['EMAIL']), str(os.environ['PASSWD']))
         server.sendmail(me, you, msg.as_string())
     i+=1
-    print(str(i)+"sent mail to: "+str(text))
+    print(str(i)+". Sent mail to: "+str(text))

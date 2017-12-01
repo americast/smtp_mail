@@ -72,12 +72,12 @@ while(1):
     except:
         print("Mail server busy, will retry after some time. ")
         os.system("sleep 5m")
-         server = smtplib.SMTP('smtp.gmail.com', 587)
-         server.starttls()
-         #Next, log in to the server
-         #print(str(os.environ['PASSWD']))
-         server.login(str(os.environ['EMAIL']), str(os.environ['PASSWD']))   
-         server.sendmail(me, you, msg.as_string())
-         del(server)
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        #Next, log in to the server
+        #print(str(os.environ['PASSWD']))
+        server.login(str(os.environ['EMAIL']), str(os.environ['PASSWD']))   
+        server.sendmail(me, you, msg.as_string())
+        del(server)
     i+=1
     print(str(i)+". Sent mail to: "+str(text))
